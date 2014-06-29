@@ -5,7 +5,7 @@
 	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 		<h3><b>Who has scored the most goals?</b><br></h3>
 		<% i = 0 %>
-		<% topgoals = 15 %>	
+		<% topgoals = 20 %>	
 		<% while i  < topgoals do %>
 			<div class="row">
 			  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
@@ -30,7 +30,7 @@
 	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 	 	<h3><b>What team has scored the most goals?</b><br></h3>
 	 		<% t = 0 %>
-			<% topteamgoals = 15 %>
+			<% topteamgoals = 20 %>
 			<% while t  < topteamgoals do %>
 				<div class="row">
 		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -51,24 +51,68 @@
 	 </div>
 	 
 	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-	 	<center><h3><b>Who's playing next?</b><br></h3></center>
-	 	<center>
-	 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-		 		<b><%= @nextmatch_hometeam['name'] %></b><br>
-		 		<%= link_to image_tag(@nextmatch_hometeam['logo']), @nextmatch_hometeam['website'] %>
-		 	</div>
-		 	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-		 		<br>
-		 		<br>
-		 		vs.
-		 	</div>
-		 	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-	 	 		<b><%= @nextmatch_awayteam['name'] %></b><br>
-		 		<%= link_to image_tag(@nextmatch_awayteam['logo']), @nextmatch_awayteam['website'] %>
-	 	 	</div>
-	 	 	<b><%= @nextmatch_time %></b><br>
-	 	 	@ <%= @nextmatch_location %>
-	 	</center>
+	 	<% if @wcwinner == 1 %>
+		 	<center><h3><b>Who's playing next?</b><br></h3></center>
+		 	<center>
+		 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+			 		<b><%= @nextmatch_hometeam['name'] %></b><br>
+			 		<%= link_to image_tag(@nextmatch_hometeam['logo']), @nextmatch_hometeam['website'] %>
+			 	</div>
+			 	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			 		<br>
+			 		<br>
+			 		vs.
+			 	</div>
+			 	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+		 	 		<b><%= @nextmatch_awayteam['name'] %></b><br>
+			 		<%= link_to image_tag(@nextmatch_awayteam['logo']), @nextmatch_awayteam['website'] %>
+		 	 	</div>
+		 	 	<b><%= @nextmatch_time %></b><br>
+		 	 	@ <%= @nextmatch_location %>
+		 	</center>
+		 <% else %>
+		 	<center><h3><b>World Cup Championship Results</b><br></h3></center>
+		 	<center>
+		 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+			 		<b><%= @winningmatch_hometeam['name'] %>: <%= @winningmatch_homescore %></b><br>
+			 		<%= link_to image_tag(@winningmatch_hometeam['logo']), @winningmatch_hometeam['website'] %>
+			 	</div>
+			 	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			 		<br>
+			 		<br>
+			 		vs.
+			 	</div>
+			 	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+		 	 		<b><%= @winningmatch_awayteam['name'] %>: <%= @winningmatch_homescore %></b><br>
+			 		<%= link_to image_tag(@winningmatch_awayteam['logo']), @winningmatch_awayteam['website'] %>
+		 	 	</div>
+		 	 	<b><%= @winningmatch_time %></b><br>
+		 	 	@ <%= @winningmatch_location %>
+		 	</center>
+		 <% end %>
+	 </div>
+	 
+	 <div class="row">
+	 	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	 		<center><h3><b>The 2014 World Cup Champion</b><br></h3></center>
+	 			<% if @wcwinner == 1 %>
+	 				<br><center>Is still being decided. Stay Tuned!</center>
+	 			<% else %>
+	 				<center><b><%= @winningteam['name'] %></b><br></center>
+		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							Wins: <%= @winningteam['wins'] %> <br>
+							Losses: <%= @winningteam['losses'] %> <br>
+							Draws: <%= @winningteam['draws'] %> <br>
+							Total Goals: <%= @winningteam['goalsFor'] %><br>
+							Goals Against: <%= @winningteam['goalsAgainst'] %><br>							
+							Founded: <%= @winningteam['foundedYear'] %> <br>
+							Home Stadium: <%= @winningteam['homeStadium'] %>
+		  			</div>
+		  			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<%= link_to image_tag(@winningteam['logo']), @winningteam['website'] %>
+			  		</div>
+	 			<% end %>
+	 	</div>
 	 </div>
 </div>
 
