@@ -1,0 +1,8 @@
+---
+applications:
+- name: SimpleWorldCupStats
+  memory: 256M
+  instances: 1
+  host: worldcupstats
+  domain: cfapps.io
+  path: "."
