@@ -1,0 +1,74 @@
+<center>
+	<h2>Simple World Cup Stats using <a href='https://www.kimonolabs.com/worldcup/explorer'>The World Cup API </a></h2>
+</center>
+<div class="row">
+	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+		<h3><b>Who has scored the most goals?</b><br></h3>
+		<% i = 0 %>
+		<% topgoals = 15 %>	
+		<% while i  < topgoals do %>
+			<div class="row">
+			  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+				<%= i + 1 %>. <%= @mostgoals_list[i]['firstName'] %> <%= @mostgoals_list[i]['lastName'] %><br>
+					Total Goals: <b> <%= @mostgoals_list[i]['goals'] %> </b><br>
+					Goals from PKs: <b> <%= @mostgoals_list[i]['penaltyGoals'] %></b><br>
+					Position: <%= @mostgoals_list[i]['position'] %> <br>
+						<% teamid = @mostgoals_list[i]['teamId'] %>
+						<% team = JSON.parse(RestClient.get(@url + @teams + '/' + teamid + '?' + @api)) %>					
+					Team: <%= @mostgoals_list[i]['nationality'] %> <%= image_tag(team['logo'], height: '24', width: '24') %><br>
+					Favored Boot: <%= @mostgoals_list[i]['foot'] %><br>
+			  </div>
+			  <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+				<img src=<%= @mostgoals_list[i]['image'] %>>
+			  </div>
+			</div>				
+			<% i += 1 %> 
+			<br>
+		<% end %>
+	 </div>
+	 
+	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	 	<h3><b>What team has scored the most goals?</b><br></h3>
+	 		<% t = 0 %>
+			<% topteamgoals = 15 %>
+			<% while t  < topteamgoals do %>
+				<div class="row">
+		  			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<%= t + 1 %>. <%= @teamgoals_list[t]['name'] %><br>
+							Total Goals: <b> <%= @teamgoals_list[t]['goalsFor'] %> </b><br>
+							Goals Against: <b> <%= @teamgoals_list[t]['goalsAgainst'] %></b><br>
+							Wins: <%= @teamgoals_list[t]['wins'] %> <br>
+							Losses: <%= @teamgoals_list[t]['losses'] %> <br>
+							Draws: <%= @teamgoals_list[t]['draws'] %>
+		  			</div>
+		  			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<%= link_to image_tag(@teamgoals_list[t]['logo']), @teamgoals_list[t]['website'] %>
+			  		</div>
+				</div>
+			<% t += 1 %> 
+			<br>
+		<% end %>
+	 </div>
+	 
+	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	 	<center><h3><b>Who's playing next?</b><br></h3></center>
+	 	<center>
+	 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+		 		<b><%= @nextmatch_hometeam['name'] %></b><br>
+		 		<%= link_to image_tag(@nextmatch_hometeam['logo']), @nextmatch_hometeam['website'] %>
+		 	</div>
+		 	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+		 		<br>
+		 		<br>
+		 		vs.
+		 	</div>
+		 	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+	 	 		<b><%= @nextmatch_awayteam['name'] %></b><br>
+		 		<%= link_to image_tag(@nextmatch_awayteam['logo']), @nextmatch_awayteam['website'] %>
+	 	 	</div>
+	 	 	<b><%= @nextmatch_time %></b><br>
+	 	 	@ <%= @nextmatch_location %>
+	 	</center>
+	 </div>
+</div>
+
