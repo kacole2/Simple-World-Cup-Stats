@@ -19,7 +19,6 @@ gem 'rest_client'
 gem 'rails_12factor', group: :production
 gem 'json'
 gem 'thin'
-gem 'heroku'
 gem 'cf' #not really used because I'm moving to Heroku. $0
 gem 'rb-readline'
 gem 'unicorn'
