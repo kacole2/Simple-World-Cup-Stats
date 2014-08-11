@@ -22,6 +22,7 @@ gem 'rails_12factor', group: :production
 gem 'json'
 gem 'thin'
 gem 'cf' #not really used because I'm moving to Heroku. $0
+gem 'heroku'
 gem 'rb-readline'
 gem 'unicorn'
 # Use jquery as the JavaScript library
